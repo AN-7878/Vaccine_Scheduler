@@ -1,41 +1,23 @@
 import 'package:flutter/material.dart';
+import 'login_page/login.dart'; // Adjust folder name if needed
 
 void main() {
-  runApp(const MyApp());
+  runApp(const VaccineScheduler());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class VaccineScheduler extends StatelessWidget {
+  const VaccineScheduler({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vaccine Scheduler',
+      title: 'VACCINE SCHEDULER',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        brightness: Brightness.light,
+        primaryColor: const Color.fromARGB(255, 170, 204, 233),
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Vaccine Scheduler"),
-      ),
-      body: const Center(
-        child: Text(
-          "Welcome to Vaccine Scheduler!",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-    );
-  }
-}
-
