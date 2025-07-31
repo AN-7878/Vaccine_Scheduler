@@ -21,3 +21,4 @@ class VaccineScheduler extends StatelessWidget {
     );
   }
 }
+
