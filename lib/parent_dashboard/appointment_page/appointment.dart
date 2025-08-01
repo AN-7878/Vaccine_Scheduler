@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class HomeScreen extends StatelessWidget {
   final String email;
   const HomeScreen({super.key, required this.email});
