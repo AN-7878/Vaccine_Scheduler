@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../child_profile.dart';
 
 class HomeScreen extends StatelessWidget {
   final String email;
@@ -9,9 +10,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Welcome")),
       body: Center(
-        child: Text(
-          "Logged in as $email",
-          style: const TextStyle(fontSize: 18),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Logged in as $email",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ChildProfilePage()),
+                );
+              },
+              child: const Text("Add Child Profile"),
+            ),
+          ],
         ),
       ),
     );
