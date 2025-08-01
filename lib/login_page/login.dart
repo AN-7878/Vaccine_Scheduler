@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'home.dart';
+import 'package:vaccine_scheduler/parent_dashboard/appointment_page/appointment.dart';
 
 Map<String, Map<String, String>> fakeUserDB = {}; // email: {password, role}
 
@@ -23,11 +24,10 @@ class _LoginPageState extends State<LoginPage> {
     if (fakeUserDB.containsKey(email) &&
         fakeUserDB[email]!['password'] == password) {
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => HomeScreen(email: email),
-        ),
+      context,
+      MaterialPageRoute(builder: (_) => AppointmentScreen(email: email)),
       );
+    
     } else {
       setState(() {
         message = "Invalid email or password!";

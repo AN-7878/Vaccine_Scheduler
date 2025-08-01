@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page/login.dart';
+import 'parent_dashboard/appointment_page/appointment.dart';
 
 void main() {
   runApp(const VaccineScheduler());
