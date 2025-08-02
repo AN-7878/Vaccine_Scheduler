@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'appointment_page/appointment.dart';
 import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
-import '../../login_page/login.dart';
+import 'package:vaccine_scheduler/login_page/login.dart';
 import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
 
 class ParentDashboard extends StatefulWidget {

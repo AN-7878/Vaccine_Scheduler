@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'package:vaccine_scheduler/parent_dashboard/pdashboard.dart';
+import 'package:vaccine_scheduler/staff_dashboard/staff.dart';
+
 
 Map<String, Map<String, String>> fakeUserDB = {}; // email: {password, role}
 
@@ -16,22 +18,32 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   String message = '';
 
-  void login() {
-    final email = emailController.text.trim();
-    final password = passwordController.text;
+void login() {
+  final email = emailController.text.trim();
+  final password = passwordController.text;
 
-    if (fakeUserDB.containsKey(email) &&
-        fakeUserDB[email]!['password'] == password) {
-      Navigator.push(
+  if (fakeUserDB.containsKey(email) &&
+      fakeUserDB[email]!['password'] == password) {
+    String role = fakeUserDB[email]!['role'] ?? 'Parent';
+
+    if (role == 'Staff') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const SdPage()),
+      );
+    } else {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => ParentDashboard(email: email)),
       );
-    } else {
-      setState(() {
-        message = "Invalid email or password!";
-      });
     }
+  } else {
+    setState(() {
+      message = "Invalid email or password!";
+    });
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
