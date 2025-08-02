@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'appointment_page/appointment.dart';
 import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
 import '../../login_page/login.dart';
+import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
 
 class ParentDashboard extends StatefulWidget {
   final String email;
@@ -22,6 +23,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
     _pages.addAll([
       AppointmentScreen(email: widget.email),
       ChildProfilePage(),
+      VaccineTimeline(),
     ]);
   }
 
@@ -53,6 +55,14 @@ class _ParentDashboardState extends State<ParentDashboard> {
               title: const Text('Child Profile'),
               onTap: () {
                 setState(() => _selectedIndex = 1);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.timeline),
+              title: const Text('Vaccine Timeline'),
+              onTap: () {
+                setState(() => _selectedIndex = 2);
                 Navigator.pop(context);
               },
             ),
