@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-
 class ChildProfilePage extends StatefulWidget {
   const ChildProfilePage({super.key});
 
@@ -43,7 +42,9 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -72,9 +73,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
 
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
-      appBar: AppBar(
-        title: const Text("Child Profile"),
-      ),
+      appBar: AppBar(title: const Text("Child Profile")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Row(
@@ -87,23 +86,21 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Full Name", style: labelStyle),
-                  TextField(
-                  controller: nameController,
-                  ),
+                  TextField(controller: nameController),
                   const SizedBox(height: 10),
                   Text("Date of Birth", style: labelStyle),
-                    const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: _pickDate,
-                          child: const Text("Pick Date"),
-                        ),
-                        const SizedBox(width: 10),
-                        if (selectedDate != null)
-                          Text("${selectedDate!.toLocal()}".split(' ')[0]),
-                      ],
-                    ),
+                  const SizedBox(height: 5),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _pickDate,
+                        child: const Text("Pick Date"),
+                      ),
+                      const SizedBox(width: 10),
+                      if (selectedDate != null)
+                        Text("${selectedDate!.toLocal()}".split(' ')[0]),
+                    ],
+                  ),
 
                   const SizedBox(height: 20),
                   Text("Gender", style: labelStyle),
@@ -134,18 +131,23 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                   const SizedBox(height: 30),
 
                   // Previous Vaccinations
-                 Text("Previous Vaccinations", style: labelStyle),
+                  Text("Previous Vaccinations", style: labelStyle),
 
                   const SizedBox(height: 10),
                   Column(
-                    children: List.generate(vaccinationControllers.length, (index) {
+                    children: List.generate(vaccinationControllers.length, (
+                      index,
+                    ) {
                       return Row(
                         children: [
                           Expanded(
                             flex: 2,
                             child: TextField(
-                              controller: vaccinationControllers[index]['vaccine'],
-                              decoration: InputDecoration(labelText: 'Vaccine Name ${index + 1}'),
+                              controller:
+                                  vaccinationControllers[index]['vaccine'],
+                              decoration: InputDecoration(
+                                labelText: 'Vaccine Name ${index + 1}',
+                              ),
                             ),
                           ),
                           const SizedBox(width: 10),
@@ -153,11 +155,16 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                             flex: 2,
                             child: TextField(
                               controller: vaccinationControllers[index]['date'],
-                              decoration: const InputDecoration(labelText: 'Date (YYYY-MM-DD)'),
+                              decoration: const InputDecoration(
+                                labelText: 'Date (YYYY-MM-DD)',
+                              ),
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.remove_circle, color: Colors.red),
+                            icon: const Icon(
+                              Icons.remove_circle,
+                              color: Colors.red,
+                            ),
                             onPressed: () => _removeVaccinationRow(index),
                           ),
                         ],
@@ -176,22 +183,27 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     onPressed: () {
                       String name = nameController.text;
                       String dob = selectedDate != null
-    ? "${selectedDate!.year.toString().padLeft(4, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.day.toString().padLeft(2, '0')}"
-    : "Not selected";
+                          ? "${selectedDate!.year.toString().padLeft(4, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.day.toString().padLeft(2, '0')}"
+                          : "Not selected";
 
                       String selectedGender = gender ?? "Not selected";
 
-                      String vaccinations = vaccinationControllers.asMap().entries.map((entry) {
-                        int index = entry.key;
-                        var data = entry.value;
-                        return "• ${data['vaccine']?.text ?? ''} - ${data['date']?.text ?? ''}";
-                      }).join("\n");
+                      String vaccinations = vaccinationControllers
+                          .asMap()
+                          .entries
+                          .map((entry) {
+                            var data = entry.value;
+                            return "• ${data['vaccine']?.text ?? ''} - ${data['date']?.text ?? ''}";
+                          })
+                          .join("\n");
 
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
                           title: const Text("Child Profile Saved"),
-                          content: Text("Name: $name\nDOB: $dob\nGender: $selectedGender\n\nVaccinations:\n$vaccinations"),
+                          content: Text(
+                            "Name: $name\nDOB: $dob\nGender: $selectedGender\n\nVaccinations:\n$vaccinations",
+                          ),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
@@ -218,9 +230,15 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     onTap: _pickImage,
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage: _image != null ? FileImage(_image!) : null,
+                      backgroundImage: _image != null
+                          ? FileImage(_image!)
+                          : null,
                       child: _image == null
-                          ? const Icon(Icons.camera_alt, size: 40, color: Colors.grey)
+                          ? const Icon(
+                              Icons.camera_alt,
+                              size: 40,
+                              color: Colors.grey,
+                            )
                           : null,
                     ),
                   ),

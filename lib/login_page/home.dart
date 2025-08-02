@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../child_profile.dart';
+import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
 
 class HomeScreen extends StatelessWidget {
   final String email;
